@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 
-import { GameBuilder } from './src/classes/GameBuilder';
+import { AppState } from './src/classes/AppState';
 
 import { CurrentTile } from './src/components/CurrentTile';
 import { PlayerGrid } from './src/components/PlayerGrid';
 
 import { boardHeight, boardWidth, edgeWidthPercentage } from './src/constants';
 
-const gameBuilder = new GameBuilder();
-const game = gameBuilder.buildGame(4, 4);
+const appState = new AppState();
 
 export default class App extends React.Component<{}> {
   render() {
@@ -57,14 +56,14 @@ export default class App extends React.Component<{}> {
     return (
       <View style={styles.container}>
         <View style={styles.playerBoard}>
-          <PlayerGrid player={game.players[0]} tileWidth={tileWidth} />
+          <PlayerGrid player={appState.game.players[0]} tileWidth={tileWidth} />
         </View>
         <View style={styles.currentTile}>
           <View style={styles.currentTileText}>
             <Text>Current Tile</Text>
           </View>
           <View style={styles.currentTileTile}>
-            {game.currentTile && <CurrentTile tile={game.currentTile} />}
+            {appState.game.currentTile && <CurrentTile tile={appState.game.currentTile} />}
           </View>
         </View>
       </View>
